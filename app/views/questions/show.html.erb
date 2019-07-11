@@ -1,0 +1,31 @@
+<div class="block">
+  <h2><%= (@question_title).html_safe %></h2>
+  <p><%= (@question_body).html_safe %></p>
+</div>
+
+<hr />
+<h5 class="center"><%= link_to 'Delete this Question', @question, method: :delete, data: { confirm: "Are you sure you want to delete this question?" } %>
+ | <%= link_to 'Edit this Question', edit_question_path(@question) %></h5>
+
+<h5 class="center"><%= link_to 'Back to Questions', questions_path %></h5>
+
+<div class="panel">
+  <h3>Submit an Answer</h3>
+  <%= render partial: 'layouts/answer_form', question: @question, answer: @answer %>
+</div>
+
+<h3 class="block">Answers to this Question:</h3>
+
+<ul class="no-bullet box">
+  <% if @answers == [] %>
+    <p class="center">This question has not yet been answered</p>
+  <% else %>
+    <% @answers.each do |answer| %>
+      <% answer_description = Redcarpet::Markdown.new(Redcarpet::Render::HTML, hard_wrap: true).render(answer.description) %>
+      <div class="panel callout">
+        <li><%= (answer_description).html_safe %></li>
+        <p class="posted">Posted: <%= answer.created_at.strftime("%B%e, %Y") %></p>
+      </div>
+    <% end %>
+  <% end %>
+</ul>

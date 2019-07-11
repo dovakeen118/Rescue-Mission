@@ -1,0 +1,22 @@
+<h1>Questions</h1>
+
+<hr />
+<h5 class="center"><%= link_to 'Submit a New Question!', new_question_path %></h5>
+<hr />
+
+<div>
+  <ul class="panel">
+    <% if @questions == [] %>
+      <p class="center">No Questions have been Submitted</p>
+    <% else %>
+      <% @questions.each do |question| %>
+        <% question_title = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(question.title) %>
+        <div>
+          <li class="title"><%= link_to (question_title).html_safe, question %></li>
+          <p class="posted">Posted: <%= question.created_at.strftime("%B%e, %Y") %></p>
+          <hr />
+        </div>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

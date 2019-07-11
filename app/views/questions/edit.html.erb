@@ -1,0 +1,8 @@
+<h1>Edit Question</h1>
+
+<div class="panel">
+  <%= render partial: 'layouts/question_form', question: @question %>
+</div>
+
+<h5 class="center"><%= link_to 'Back to Question', question_path %></h5>
+<h5 class="center"><%= link_to 'Delete this Question', @question, method: :delete, data: { confirm: "Are you sure you want to delete this question?" } %></h5>
