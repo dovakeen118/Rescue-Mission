@@ -23,7 +23,7 @@
     <% @answers.each do |answer| %>
       <% answer_description = Redcarpet::Markdown.new(Redcarpet::Render::HTML, hard_wrap: true).render(answer.description) %>
       <div class="panel callout">
-        <li><%= (answer_description).html_safe %></li>
+        <%= (answer_description).html_safe %>
         <p class="posted">Posted: <%= answer.created_at.strftime("%B%e, %Y") %></p>
       </div>
     <% end %>
